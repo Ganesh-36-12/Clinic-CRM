@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    #div_id_gender div {
+        display:inline-flex;
+        width: 95%;
+    } /* Renders the radio buttons inline and spreads across your div */
+    
+    #div_id_gender .form-check-label {
+        margin-left: 5px;
+
+    } /* puts a bit of space between the radio and label */
+    
+    #div_id_gender .form-label {
+        margin-right: 5px;
+    }
+</style>
+<class="container-lg"> <!-- start container -->
+    <div class="py-3">
+        <a class="btn btn-primary" href= "{% url 'patients:home' %}"> Go back </a>
+    </div>
+    <div class="form-control " style="justify-content: center; align-items: center;">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy}}
+            <!-- {{ form.gender|as_crispy_field }} -->
+            <input class="btn btn-primary" type="submit" value="Create"/>
+        </form>
+    </div>
+</div> <!-- start container -->
+{% endblock content %}

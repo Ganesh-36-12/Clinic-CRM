@@ -1,0 +1,56 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+<style>
+    td {
+        border: 1px solid black;
+        text-align: justify;
+        align-items: center;
+        padding: 10px;
+    }
+</style>
+<div class="conatiner">
+    <div class="my-3">
+        <a  class= "btn btn-primary" href= "{% url 'patients:patient-detail' Records.patient.id %}"> Go back </a>
+    </div>
+    <div>
+        <table class="table text-align-center">
+            <tr>
+                <td width="30%">NAME</td>
+                <td width="70%"> {{Records.patient}}</td>
+            </tr>
+            <tr>
+                <td>Patinet's symptom:  </td>
+                <td> {{Records.patient_cause}}</td>
+            </tr>
+            <tr>
+                <td>REPORTS TAKEN</td>
+                <td>
+                    <ul style="list-style-type: square;">
+                        {% for obj in Records.reports %}
+                        <li> {{obj}} </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>TREATMENTS GIVEN</td>
+                <td>
+                    <ul style="list-style-type: square;">
+                        {% for obj in Records.treatments %}
+                        <li> {{obj}} </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <hr/>
+        <a class="btn btn-info" href="{% url 'patients:record-update' Records.pk %}" class="card-link">Update</a>
+        <a class="btn btn-danger" href="{% url 'patients:record-delete' Records.pk %}" class="card-link">Delete</a>
+        <div>refered by: {{Records.doctor}}</div>
+        <div>Entered date: {{Records.created_on}}</div>
+    </div>
+</div>
+
+{% endblock content %}
